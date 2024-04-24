@@ -86,6 +86,21 @@
 	const userName = 'RenegadeMaster';
 	setContext('username-context', userName);
 
+	import Popup from './components/Popup.svelte';
+	let showPopup = false
+	function closePopup(event) {
+		showPopup = false
+		console.log(event.detail)
+	}
+
+	import Outer from './components/Outer.svelte';
+	function handleGreet(event) {
+		alert(event.detail)
+	}
+
+	import Button from './components/Button.svelte';
+    import Card from './components/Card.svelte';
+	import CardNamed from './components/CardNamed.svelte';
 </script>
 
 <main>
@@ -223,6 +238,47 @@
 	<h2>Cuurent volume {volume}</h2>
 	<button on:click={() => volume += 2}>Increase volume</button>
 	<button on:click={() => volume -= 2}>Decrease volume</button>
+
+	<hr>
+	<button on:click={() => showPopup = true}>Show Popup</button>
+	{#if showPopup}
+		<Popup on:close={closePopup} />
+	{/if}
+
+	<hr>
+
+	<Outer on:greet={handleGreet}/>
+	<Button on:click={() => alert('Button Clicked')} />
+
+	<hr>
+
+	<Card>Card content</Card>
+	<Card><h2>Card content</h2></Card>
+	<Card></Card>
+	<Card><img src="https://picsum.photos/200"></Card>
+
+	<hr>
+
+	<CardNamed>
+		<div slot="header">
+			<h3>Header</h3>
+		</div>
+		<div slot="content">
+			<img src="https://picsum.photos/200" alt="">
+		</div>
+		<div slot="footer">
+			<button>View Details</button>
+		</div>
+	</CardNamed>
+	<CardNamed>
+		<div slot="header">
+			<h3>Header - no footer</h3>
+		</div>
+		<div slot="content">
+			<img src="https://picsum.photos/200" alt="">
+		</div>
+	</CardNamed>
+
 
 </main>
 
