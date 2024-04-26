@@ -101,6 +101,21 @@
 	import Button from './components/Button.svelte';
     import Card from './components/Card.svelte';
 	import CardNamed from './components/CardNamed.svelte';
+    import NameList from './components/NameList.svelte';
+    import ChildStyles from './components/ChildStyles.svelte';
+    import PostList from './components/PostList.svelte';
+    import AutoFocus from './components/AutoFocus.svelte';
+    import TabA from './components/TabA.svelte';
+	import TabB from './components/TabB.svelte';
+	import TabC from './components/TabC.svelte';
+	let activeTab = TabA;
+
+	import Counter, { getTotalCount } from './components/Counter.svelte';
+    import Display from './components/Display.svelte';
+    import Increment from './components/Increment.svelte';
+    import Decrement from './components/Decrement.svelte';
+    import Reset from './components/Reset.svelte';
+    import Timer from './components/Timer.svelte';
 </script>
 
 <main>
@@ -279,10 +294,84 @@
 		</div>
 	</CardNamed>
 
+	<hr>
+
+	<NameList>
+		<h3 slot='hero' let:firstName let:lastName>
+			{firstName} {lastName}
+		</h3>
+	</NameList>
+
+	<NameList>
+		<h3 slot='hero' let:firstName let:lastName>
+			{lastName} {firstName}
+		</h3>
+	</NameList>
+
+	<NameList>
+		<h3 slot='hero' let:firstName let:lastName>
+			{firstName}
+		</h3>
+	</NameList>
+
+	<hr>
+	<h3>App component global style</h3>
+	<h4>App component text</h4>
+	<ChildStyles />
+
+	<hr>
+
+	<PostList />
+
+	<hr>
+
+	<AutoFocus />
+
+	<hr>
+	<button on:click={() => activeTab = TabA}>Tab A</button>
+	<button on:click={() => activeTab = TabB}>Tab B</button>
+	<button on:click={() => activeTab = TabC}>Tab C</button>
+
+	<!-- {#if activeTab === 'TabA'}
+		<TabA />
+	{:else if activeTab === 'TabB'}
+		<TabB />
+	{:else if activeTab === 'TabC'}
+		<TabC />
+	{/if} -->
+
+	<svelte:component this={activeTab}></svelte:component>
+
+	<hr>
+	<button on:click={() => alert(getTotalCount())}>Alert total count</button>
+	<Counter />
+	<Counter />
+	<Counter />
+
+	<hr>
+
+	<Display />
+	<Increment />
+	<Decrement />
+	<Reset />
+
+	<hr>
+
+	<Timer />
+
+	<hr>
 
 </main>
 
 <style>
+
+	:global(h3) {
+		color: blue;
+	}
+
+	h4 {
+		color: orange;
+	}
 
 	input + label {
 		display: inline-flex;
