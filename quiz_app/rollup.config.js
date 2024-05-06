@@ -1,4 +1,5 @@
 import { spawn } from 'child_process';
+import autoPreprocess from 'svelte-preprocess'
 import svelte from 'rollup-plugin-svelte';
 import commonjs from '@rollup/plugin-commonjs';
 import terser from '@rollup/plugin-terser';
@@ -39,6 +40,7 @@ export default {
 	},
 	plugins: [
 		svelte({
+			preprocess: autoPreprocess(),
 			compilerOptions: {
 				// enable run-time checks when not in production
 				dev: !production
