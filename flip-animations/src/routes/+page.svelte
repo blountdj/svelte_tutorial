@@ -12,6 +12,9 @@
         <li>
             <a href="/04-movies">4. Movies</a>
         </li>
+        <li>
+            <a href="/05-dogs">5. Dogs</a>
+        </li>
     </ul>
 </div>
 
